@@ -64,6 +64,26 @@ paths:
       x-content-type: application/json
       x-accepts: application/json
   /inventory/car/{id}:
+    delete:
+      description: Delete a Car by unique id
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Successfully deleted a Car using a unique id.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_inventory_car__get_400_response'
+          description: Invalid request
+      x-accepts: application/json
     get:
       description: Obtain information about a Car by unique id
       parameters:

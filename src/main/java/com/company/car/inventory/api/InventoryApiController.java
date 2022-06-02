@@ -69,4 +69,13 @@ public class InventoryApiController implements InventoryApi {
         service.save(car);
 		return ResponseEntity.ok().build();
     }
+
+    @Override
+    public ResponseEntity<Void> inventoryCarIdDelete(String carId) {
+        if(service.delete(Integer.parseInt(carId))) {
+            return ResponseEntity.ok().build();
+        }
+
+        return ResponseEntity.notFound().build();
+    }
 }

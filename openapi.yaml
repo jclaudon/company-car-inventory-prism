@@ -63,6 +63,19 @@ paths:
 
         "400":
           $ref: "#/components/responses/400Error"
+    delete:
+      description: Delete a Car by unique id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successfully deleted a Car using a unique id.
+        "400":
+          $ref: "#/components/responses/400Error"
 
 components:
   securitySchemes:

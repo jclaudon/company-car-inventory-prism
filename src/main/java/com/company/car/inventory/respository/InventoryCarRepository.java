@@ -61,4 +61,13 @@ public class InventoryCarRepository {
     public void save(Car car) {
         inventoryCars.put(car.getId(), car);
     }
+
+    public boolean delete(Integer id) {
+        if(!inventoryCars.containsKey(id)) {
+            return false;
+        }
+
+        inventoryCars.remove(id);
+        return true;
+    }
 }

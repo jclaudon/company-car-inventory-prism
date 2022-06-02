@@ -25,4 +25,8 @@ public class InventoryCarService {
         repository.save(car);
     }
 
+    public boolean delete(Integer carId) {
+        return repository.delete(carId);
+    }
+
 }

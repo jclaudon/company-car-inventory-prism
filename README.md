@@ -14,10 +14,11 @@ To build artifact and image via maven (in same directory as pom): ``sh ./docker/
 Run locally on docker: ``docker compose up``
 
 ## K8s Build
-To build image: ``./docker/docker-cli-build.sh``
+To build image: ``sh ./docker/docker-cli-build.sh``
 
-To deploy to K8s locally: ``./kubernetes/kubernetes-apply.cmd``
+To deploy to K8s locally: ``sh ./kubernetes/apply.sh``
 
+To update image after creation and auto-deploy out to kubernetes: ``sh ./kubernetes/update-image.sh``
 ### Redploy to K8s
 If you make code changes and you want to see them reflected in K8s, rebuild the image and redeploy to K8s.
 

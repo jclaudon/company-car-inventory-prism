@@ -1,0 +1,1 @@
+docker build -f Dockerfile -t car-inventory-service-image:v1 ../.

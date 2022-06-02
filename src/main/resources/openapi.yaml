@@ -1,0 +1,151 @@
+openapi: 3.0.0
+info:
+  description: Details on real-time inventory and availabiliy of cars.
+  title: Company Car Inventory Service
+  version: 1.0.0
+servers:
+- url: https://localhost:8080/v1
+security:
+- BasicAuth: []
+paths:
+  /inventory/car/:
+    get:
+      description: Returns a list of cars in Company' system.
+      parameters:
+      - description: Limits the number of items on a page
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Specifies the page number of the Cars to be displayed
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Car'
+                type: array
+          description: Successfully returned a list of cars.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_inventory_car__get_400_response'
+          description: Invalid request
+      x-accepts: application/json
+    post:
+      description: Add a new Car into Company' inventory
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Car'
+        required: true
+      responses:
+        "200":
+          description: Successfully added a new Car into Company' inventory.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_inventory_car__get_400_response'
+          description: Invalid request
+      x-content-type: application/json
+      x-accepts: application/json
+  /inventory/car/{id}:
+    get:
+      description: Obtain information about a Car by unique id
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Car'
+          description: Successfully returned a Car by id.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_inventory_car__get_400_response'
+          description: Invalid request
+      x-accepts: application/json
+components:
+  parameters:
+    PageLimit:
+      description: Limits the number of items on a page
+      explode: true
+      in: query
+      name: limit
+      required: false
+      schema:
+        type: integer
+      style: form
+    PageOffset:
+      description: Specifies the page number of the Cars to be displayed
+      explode: true
+      in: query
+      name: offset
+      required: false
+      schema:
+        type: integer
+      style: form
+  responses:
+    "400Error":
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/_inventory_car__get_400_response'
+      description: Invalid request
+  schemas:
+    Car:
+      example:
+        year: 6
+        car_color: car_color
+        model: model
+        id: 0
+        make: make
+        car_type: car_type
+      properties:
+        id:
+          type: integer
+        car_type:
+          type: string
+        car_color:
+          type: string
+        year:
+          type: integer
+        make:
+          type: string
+        model:
+          type: string
+      required:
+      - id
+      type: object
+    _inventory_car__get_400_response:
+      properties:
+        message:
+          type: string
+      type: object
+  securitySchemes:
+    BasicAuth:
+      scheme: basic
+      type: http

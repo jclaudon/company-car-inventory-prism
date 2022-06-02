@@ -1,0 +1,115 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Company Car Inventory Service
+  description: Details on real-time inventory and availabiliy of cars.
+
+servers:
+  - url: https://localhost:8080/v1
+
+security:
+  - BasicAuth: []
+
+paths:
+  /inventory/car/:
+    get:
+      description: Returns a list of cars in Company' system.
+      parameters:
+        - $ref: "#/components/parameters/PageLimit"
+        - $ref: "#/components/parameters/PageOffset"
+      responses:
+        "200":
+          description: Successfully returned a list of cars.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Car"
+        "400":
+          $ref: "#/components/responses/400Error"
+
+    post:
+      description: Add a new Car into Company' inventory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Car"
+      responses:
+        "200":
+          description: Successfully added a new Car into Company' inventory.
+        "400":
+          $ref: "#/components/responses/400Error"
+
+  /inventory/car/{id}:
+    get:
+      description: Obtain information about a Car by unique id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+
+      responses:
+        "200":
+          description: Successfully returned a Car by id.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Car"
+
+        "400":
+          $ref: "#/components/responses/400Error"
+
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+
+  schemas:
+    Car:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+        car_type:
+          type: string
+        car_color:
+          type: string
+        year:
+          type: integer
+        make:
+          type: string
+        model:
+          type: string
+  parameters:
+    PageLimit:
+      name: limit
+      in: query
+      description: Limits the number of items on a page
+      schema:
+        type: integer
+
+    PageOffset:
+      name: offset
+      in: query
+      description: Specifies the page number of the Cars to be displayed
+      schema:
+        type: integer
+
+  responses:
+    400Error:
+      description: Invalid request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string

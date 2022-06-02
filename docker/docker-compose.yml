@@ -1,0 +1,17 @@
+# run docker locally in container
+version: '1'
+services:   
+    car-inventory-service-container:
+        container_name: car-inventory-service-container
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: car-inventory-service-image:latest
+        ports:
+            - 8080:8080
+        networks:
+            - spring-cloud-network
+
+networks:
+    spring-cloud-network:
+        driver: bridge

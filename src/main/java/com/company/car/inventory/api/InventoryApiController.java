@@ -48,7 +48,7 @@ public class InventoryApiController implements InventoryApi {
     }
 
     @Override
-    public ResponseEntity<List<Car>> inventoryCarGet(Integer limit,Integer offset) {
+    public ResponseEntity<List<Car>> getInventoryCar    (Integer limit,Integer offset) {
         
         return Optional
             .ofNullable( service.getAll() )
@@ -57,7 +57,7 @@ public class InventoryApiController implements InventoryApi {
     }
 
     @Override
-    public ResponseEntity<Car> inventoryCarIdGet(String carId) {
+    public ResponseEntity<Car> getInventoryCarById(String carId) {
         return Optional
             .ofNullable( service.get(Integer.parseInt(carId)) )
             .map( car -> ResponseEntity.ok().body(car) )          //200 OK
@@ -65,13 +65,13 @@ public class InventoryApiController implements InventoryApi {
     }
 
     @Override
-    public ResponseEntity<Void> inventoryCarPost(Car car) {
+    public ResponseEntity<Void> postInventoryCar(Car car) {
         service.save(car);
 		return ResponseEntity.ok().build();
     }
 
     @Override
-    public ResponseEntity<Void> inventoryCarIdDelete(String carId) {
+    public ResponseEntity<Void> deleteInventoryCarById(String carId) {
         if(service.delete(Integer.parseInt(carId))) {
             return ResponseEntity.ok().build();
         }

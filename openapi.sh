@@ -3,7 +3,7 @@
 # Generate blown-out java code based on openapi spec file.
 # Also generates openapi.yaml file with references injected.  See resource directory.
 
-openapi-generator generate \
+openapi-generator-cli generate \
      -g spring \
      --library spring-boot \
      -i openapi.yaml \

@@ -6,6 +6,8 @@ The service itself is a simple CRUD service that returns information about a Com
 ## Generate code
 While the code should generate at build time, if you want to see your edits between builds run: ``sh ./openapi.sh`` to regenerate the java code and resources/openapi.yaml file with your new changes.
 
+Pre-requistite: https://openapi-generator.tech/docs/installation/
+
 ## Docker Build
 Warning: If you use this approach, the image will not be accessable to kubernetes.
 

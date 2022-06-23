@@ -14,6 +14,7 @@ paths:
   /inventory/car/:
     get:
       description: Returns a list of cars in Company' system.
+      operationId: getInventoryCar
       parameters:
         - $ref: "#/components/parameters/PageLimit"
         - $ref: "#/components/parameters/PageOffset"
@@ -31,6 +32,7 @@ paths:
 
     post:
       description: Add a new Car into Company' inventory
+      operationId: postInventoryCar
       requestBody:
         required: true
         content:
@@ -46,6 +48,7 @@ paths:
   /inventory/car/{id}:
     get:
       description: Obtain information about a Car by unique id
+      operationId: getInventoryCarById
       parameters:
         - name: id
           in: path
@@ -65,6 +68,7 @@ paths:
           $ref: "#/components/responses/400Error"
     delete:
       description: Delete a Car by unique id
+      operationId: deleteInventoryCarById
       parameters:
         - name: id
           in: path

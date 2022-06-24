@@ -1,7 +1,6 @@
 package com.company.car.inventory.api;
 
 import com.company.car.inventory.model.Car;
-import com.company.car.inventory.model.InventoryCarGet400Response;
 import com.company.car.inventory.service.InventoryCarService;
 
 import org.springframework.beans.factory.annotation.Autowired;

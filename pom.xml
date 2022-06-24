@@ -12,6 +12,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <springdoc.version>1.6.8</springdoc.version>
         <swagger-ui.version>4.10.3</swagger-ui.version>
+        <rest-assured.version>5.1.1</rest-assured.version>
+        <rest-assured-json-schema-validator.version>5.1.1</rest-assured-json-schema-validator.version>
     </properties>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -26,6 +28,34 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.2</version>
+				<configuration>
+					<excludes>
+						<exclude>**/*IT</exclude>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>test</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>2.22.2</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
             <!-- source gen added to build -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -38,7 +68,9 @@
                             <goal>add-source</goal>
                         </goals>
                         <configuration>
-                            <sources>src/main/gen</sources>
+                            <sources>
+                                <source>src/main/gen</source>
+                            </sources>
                         </configuration>
                     </execution>
                 </executions>
@@ -91,6 +123,18 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>${rest-assured.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>json-schema-validator</artifactId>
+            <version>${rest-assured-json-schema-validator.version}</version>
             <scope>test</scope>
         </dependency>
 

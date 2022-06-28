@@ -68,9 +68,7 @@
                             <goal>add-source</goal>
                         </goals>
                         <configuration>
-                            <sources>
-                                <source>src/main/gen</source>
-                            </sources>
+                            <sources>src/main/gen</sources>
                         </configuration>
                     </execution>
                 </executions>

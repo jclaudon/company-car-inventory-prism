@@ -3,21 +3,21 @@
         {
             "request": {
                 "method": "GET",
-                "url": "/api/integration1"
+                "url": "/api/standaloneintegration1"
             },
             "response": {
                 "status": 200,
-                "body": "First Integration Test"
+                "body": "First Standalone Integration Test"
             }
         },
         {
             "request": {
                 "method": "GET",
-                "url": "/api/integration2"
+                "url": "/api/standaloneintegration2"
             },
             "response": {
                 "status": 200,
-                "body": "Second Integration Test"
+                "body": "Second Standalone Integration Test"
             }
         }
     ]

@@ -1,11 +1,13 @@
 package integration;
 
-import org.junit.jupiter.api.*;
+import static io.restassured.RestAssured.given;
+
+import java.util.*;
+
 import io.restassured.RestAssured;
 import io.restassured.parsing.Parser;
 import io.restassured.response.Response;
-
-import static io.restassured.RestAssured.given;
+import org.junit.jupiter.api.*;
 
 class GetInventoryStandaloneIT {
     @BeforeAll
@@ -15,22 +17,22 @@ class GetInventoryStandaloneIT {
     }
 
     @Test
-    void firstStandaloneIT() {
+    void getInventory() {
         Response response = given()
-            .get("/standaloneintegration1");
+            .get("/inventory");
 
         Assertions.assertEquals(200, response.statusCode());
-        Assertions.assertEquals("First Standalone Integration Test", response.asPrettyString());
-        System.out.println(String.format("\n\nThe response from http://localhost:8086/api/standaloneintegration1 was: %s\n\n", response.asPrettyString()));
-    }
+        List<Map<String, ?>> cars = response.path("$");
+        Assertions.assertTrue(cars.size() == 6);
 
-    @Test
-    void secondStandaloneIT() {
-        Response response = given()
-            .get("/standaloneintegration2");
-
-        Assertions.assertEquals(200, response.statusCode());
-        Assertions.assertEquals("Second Standalone Integration Test", response.asPrettyString());
-        System.out.println(String.format("\n\nThe response from http://localhost:8086/api/standaloneintegration2 was: %s\n\n", response.asPrettyString()));
+        // This checks the keys in a car response object
+        for(Map<String, ?> car: cars) {
+            Assertions.assertTrue(car.containsKey("id"));
+            Assertions.assertTrue(car.containsKey("car_type"));
+            Assertions.assertTrue(car.containsKey("car_color"));
+            Assertions.assertTrue(car.containsKey("year"));
+            Assertions.assertTrue(car.containsKey("make"));
+            Assertions.assertTrue(car.containsKey("model"));
+        }
     }
 }

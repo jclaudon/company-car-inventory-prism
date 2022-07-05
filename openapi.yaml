@@ -23,6 +23,17 @@ paths:
           description: Successfully returned a list of cars.
           content:
             application/json:
+              example:
+                [
+                  {
+                    id: 1,
+                    car_type: sedan,
+                    car_color: red,
+                    year: 2015,
+                    make: infiniti,
+                    model: g35
+                  }
+                ]
               schema:
                 type: array
                 items:
